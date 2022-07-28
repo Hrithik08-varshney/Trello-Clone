@@ -24,6 +24,7 @@ const WorkContent=(props)=>{
     const fetchWorkSpace = async () => {
       const result = await getStar();
       setDataObj(result);
+      console.log(result,"result");
     }
   
     fetchWorkSpace()

@@ -19,11 +19,11 @@ const BoardContent=(props)=>{
 
     return(
         <div className="yourWorkspaceContent">
-        {Object.values(props.item).map((val, valIndex) => {
+        {Object.values(props.item)?.map((val, valIndex) => {
           return (
             <div key={valIndex} className="linkDiv">
               <Link
-                to={`/${props.objKeys[props.index]}/create`}
+                to={`/${props.objKeys[props.index]}/${val?.title}`}
                 className="fetchedContent"
               >
                 <p>{val?.title}</p>

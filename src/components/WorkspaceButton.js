@@ -1,8 +1,9 @@
 import SettingsIcon from '@mui/icons-material/Settings';
 import GroupIcon from '@mui/icons-material/Group'; 
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
+import { Link } from 'react-router-dom';
 import "../App.css";
-const WorkspaceButton=()=>{
+const WorkspaceButton=(props)=>{
     const buttondata=[
         {
             idName:"leftBoards",
@@ -25,11 +26,13 @@ const WorkspaceButton=()=>{
       {
         buttondata.map((item,val)=>{
            return(
-            <button key={val}
+            <Link 
+            to={`/${props?.objKeysIndex}`}
+            key={val}
             className='workspaceButtonClass'>
                 <p>{item.icon}</p>
                 <p className='workspaceButtonClassPara'>{item.name}</p>
-            </button>
+            </Link>
            )
         })
       }

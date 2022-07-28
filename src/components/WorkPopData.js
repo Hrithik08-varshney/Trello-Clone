@@ -10,6 +10,7 @@ const WorkPopData=()=>{
     const fetchWorkSpace = async () => {
       const result = await getWorkspace();
       setArrWork(result);
+      console.log(result);
     }
   
     fetchWorkSpace()

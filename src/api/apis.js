@@ -20,7 +20,7 @@ export const postStar = async (postStarred)=>{
         }
       ); */
 
-  await axios.post("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/starred.json",{postStarred});
+  await axios.post("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/starred.json",{...postStarred});
 }
 
 export const putStar =async(newObj)=>{
@@ -65,4 +65,9 @@ export const getWorkspace=async()=>{
 
   const res=await axios.get("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/workspace.json")
   return (res.data);
+}
+
+export const getWorkspaceByName=async(workspace)=>{
+const res=await axios.get( `https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/boardData/${workspace}.json`);
+return (res.data);
 }

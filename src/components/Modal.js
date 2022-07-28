@@ -160,7 +160,7 @@ const ModalComp = (props) => {
               <VisibilityAccordian
                 backData={backData}
                 setBackData={setBackData}
-                title="Workspace"
+                title="Select A Workspace"
                // data={arr}
                 setUrlVal={setUrlVal}
               />

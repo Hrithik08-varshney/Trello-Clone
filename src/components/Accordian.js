@@ -11,6 +11,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SettingsIcon from '@mui/icons-material/Settings';
 import GroupIcon from '@mui/icons-material/Group'; 
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
+import { Link } from "react-router-dom";
 
 /* import CreditCardIcon from '@mui/icons-material/CreditCard'; */
 export default function ControlledAccordions(props) {
@@ -18,12 +19,14 @@ export default function ControlledAccordions(props) {
     {
       idName:"leftBoards",
       icon:<NoteAltIcon/>,
-      name:"Boards"
+      name:"Boards",
+      to:props.titleName
     },
     {
        idName:"leftCollections",
        icon:<CollectionsIcon/>,
-      name:"Collections"
+      name:"Collections",
+      to:props.titleName
     },
     {
       idName:"leftHighlights",
@@ -80,14 +83,16 @@ name:"Settings"
         {data.map((item, index) => {
           return (
             <AccordionDetails key={index}>
-              <div className="leftBelowContentDiv">
+              <Link 
+              to={`/${item.to}`}
+              className="leftBelowContentDiv">
               <div className="leftBelowIcon">
                   {item?.icon}
                 </div>
                 <div className="leftBelowIconTitle">
                     {item?.name}
                 </div>    
-              </div>
+              </Link>
             </AccordionDetails>
           );
         })}

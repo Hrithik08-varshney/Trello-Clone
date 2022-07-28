@@ -193,6 +193,7 @@ font-size: 17px;
   display: flex;
   padding:5px;
   border-radius: 5px;
+  color: black;
 }
 .leftBelowContentDiv:hover{
   background-color: lightgray;
@@ -421,6 +422,7 @@ font-size: 17px;
   background-color: rgb(233, 244, 248);
   padding: 4px;
   border-radius: 2px;
+  color: black;
   cursor: pointer;
 }
 .workspaceButtonClassPara{
@@ -537,4 +539,27 @@ font-size: 17px;
 .workspacePageHeadingContent{
   display: flex;
   margin-top: 10px;
+}
+.parentWorkspacePageBoards{
+  display: flex;
+  justify-content: space-around;
+}
+.workspacePageBoards{
+  width: 1200px;
+  display: flex;
+}
+
+.createButtonDiv{
+  background: none;
+  width: 250px;
+  height: 100px;
+  border: none;
+  background-color: rgb(254, 241, 241);
+  border-radius: 5px;
+  margin: 20px 0px 0px 0px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.createButtonDiv:hover{
+  background-color: rgb(235, 224, 224);;
 }

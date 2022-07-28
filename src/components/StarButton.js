@@ -1,27 +1,25 @@
 import { useContext } from "react";
 import "../App.css";
-import { StarProvider } from "../context/start.context";
+/* import { StarProvider } from "../context/start.context"; */
 import {postStar , putStar , putBoard} from "../api/apis";
 import { ArrBoard } from "../context/arrBoard";
 
 const StarButton = (props) => {
-  const {isStarred, setIsStarred} = useContext(StarProvider);
+/*   const {isStarred, setIsStarred} = useContext(StarProvider); */
   const {arrBoard,setArrBoard}=useContext(ArrBoard);
 
   const postData = async (event) => {
-    putBoard(arrBoard);
+    putBoard({...arrBoard});
   };
 
   const handleActive = (e, val) => {
     if (val.starred === "false") {
-    setIsStarred("true");
-    val.starred=isStarred;
-     /*  val.starred = "true"; */
+/*     setIsStarred("true"); */
+     val.starred = "true"; 
       e.target.className = "starColor";
     } else {
-      setIsStarred("false");
-      val.starred=isStarred;
-      /* val.starred = "false"; */
+      /* setIsStarred("false"); */
+       val.starred = "false";
       e.target.className = "star";
     }
     postData();
@@ -29,8 +27,9 @@ const StarButton = (props) => {
 
   const handleStar = (item) => {
     if (props.dataObj) {
+      console.log(props.dataObj,"props.dataObj");
       var prevItem = Object.values(props.dataObj).map((item) => {
-        return item?.obj?.title;
+         return item?.obj?.title; 
       });
     }
 
@@ -45,18 +44,14 @@ const StarButton = (props) => {
     if (res?.length > 0) {
       Object.values(props.dataObj).map((i) => {
         if (i?.obj?.title === item?.title) {
-         /*  i.post = "false"; */
-         i.post=isStarred;
+           i.post = "false"; 
         }
       });
       const newObj = Object.values(props.dataObj).filter((i) => {
-        setIsStarred("true");
-        /* return i.post === "true"; */
-        return i.post===isStarred;
+         return i.post === "true"; 
+      
       });
-
-      //DATA ADD
-     
+     console.log(newObj,"newObj before put");
       putStar(newObj);
 
     } else {
