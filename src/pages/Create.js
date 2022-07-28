@@ -1,11 +1,17 @@
 import AppBar from "../components/AppBar";
-import {useLocation} from "react-router-dom"
+import Notes from "../components/Notes";
+
 const Create=()=>{
-    const state=useLocation();
-    console.log(state.state);
+ 
+  
     return (
     <>
      <AppBar/>
+     <div className="notesDiv">
+     <Notes
+     />
+     </div>
+   
     </>
     )
 }

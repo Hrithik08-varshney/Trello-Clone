@@ -8,12 +8,11 @@ import Modal from "./Modal";
 import WorkspaceModal from "./WorkspaceModal";
 
 const CreateButtonData = () => {
-  
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   const [workOpen, setWorkOpen] = useState(false);
   const handleWorkOpen = () => setWorkOpen(true);
   const handleWorkClose = () => setWorkOpen(false);
@@ -39,7 +38,6 @@ const CreateButtonData = () => {
       name: "Create Workspace",
       para: "A workspace is a group of boards and people. Use it to organise your company, side hustle, family, or friends.",
       modalText: "Create Workspace",
-      
     },
   ];
 
@@ -50,11 +48,11 @@ const CreateButtonData = () => {
           <>
             <button
               onClick={() => {
-                  if(`${val.name}`==="Create Board"){
-                    handleOpen();
-                  }else{
-                    handleWorkOpen();
-                  }
+                if (`${val.name}` === "Create Board") {
+                  handleOpen();
+                } else {
+                  handleWorkOpen();
+                }
                 setModalData(val.modalText);
               }}
               key={val.name}
@@ -67,13 +65,14 @@ const CreateButtonData = () => {
               </div>
               <div className="createButtonLowerDiv">{val.para}</div>
             </button>
-            <Modal 
-            open={open}
-            handleClose={handleClose}
-            modalData={modalData}
+            <Modal
+              open={open}
+              handleClose={handleClose}
+              modalData={modalData}
             />
             <WorkspaceModal
-              workOpen={workOpen} handleWorkClose={handleWorkClose}
+              workOpen={workOpen}
+              handleWorkClose={handleWorkClose}
             />
           </>
         );

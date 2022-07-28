@@ -9,7 +9,9 @@ import { ArrWorkspace } from "../context/arr.context";
 import { useContext } from "react";
 import { getWorkspace } from "../api/apis";
 const Workspace = () => {
+
   const { workspace } = useParams();
+
   const { arrWork, setArrWork } = useContext(ArrWorkspace);
   const [desc, setDesc] = useState();
   const [arr, setArr] = useState([]);
@@ -19,11 +21,9 @@ const Workspace = () => {
   useEffect(() => {
     const fetchWorkSpace = async () => {
       const result = await getWorkspace();
-      setArrWork(result);
-      console.log(result, "result");
+      setArrWork(result); 
     };
     fetchWorkSpace().then(() => {
-      console.log(arrWork, "arrWork");
       Object.values(arrWork).map((item,index)=>{
        if(item.title===workspace){
         setDesc(item.desc);
@@ -41,7 +41,7 @@ const Workspace = () => {
     };
 
     fetchWorkSpace();
-  }, []);
+  }, [workspace]);
 
   return (
     <>
