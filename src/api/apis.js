@@ -55,6 +55,9 @@ export const putBoard = async(arr)=>{
   axios.put("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/boardData.json",{...arr})
 }
 
+export const putWorkspace = async(arrWork)=>{
+  axios.put("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/workspace.json",{...arrWork})
+}
 export const getStar=async()=>{
 
   const res = await axios.get("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/starred.json")

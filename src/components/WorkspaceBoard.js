@@ -14,6 +14,7 @@ const WorkspaceBoard = (props) => {
       {Object.values(props?.arr)?.map((item, index) => {
         return (
           <Card
+            key={index}
             path={`/${item.workspaceName}/${item.title}`}
             title={item.title}
             img={item.img}
