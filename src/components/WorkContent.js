@@ -5,22 +5,12 @@ import { ArrBoard } from "../context/arrBoard";
 
 const WorkContent=(props)=>{
 
-  const {setArrBoard}=useContext(ArrBoard);
-
-
-  useEffect(() => {
-    const fetchWorkSpace = async () => {
-      const result = await getBoards();
-      setArrBoard(result);
-    }
-  
-    fetchWorkSpace();
-  }, []);
+  const {arrBoard,setArrBoard}=useContext(ArrBoard);
 
   const [dataObj, setDataObj] = useState(null);
 
 
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchWorkSpace = async () => {
       const result = await getStar();
       setDataObj(result);
@@ -28,7 +18,7 @@ const WorkContent=(props)=>{
     }
   
     fetchWorkSpace()
-  }, []);
+  }, []); */
   
 
     return(

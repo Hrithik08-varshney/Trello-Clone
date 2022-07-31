@@ -13,7 +13,7 @@ const BoardRightPanel = () => {
 /*   console.log(isStarred, "ISSTARRED") */
   
   useEffect(() => {
-    const fetchWorkSpace = async () => {
+    const fetchBoards = async () => {
       const result = await getBoards();
       if(result!=null || undefined){
         setObjKeys(Object.keys(result));
@@ -21,7 +21,7 @@ const BoardRightPanel = () => {
       }
     }
   
-    fetchWorkSpace();
+    fetchBoards();
   }, []);
 
   return (

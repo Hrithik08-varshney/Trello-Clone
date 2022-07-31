@@ -1,27 +1,40 @@
  import WorkContent from "./WorkContent";
- import { useContext } from "react";
- import  {ArrStar}  from "../context/arrStar.js";
- import { getStar } from "../api/apis";
+ import { useContext, useState } from "react";
+ import {getBoards} from "../api/apis";
  import { useEffect } from "react";
+ import { ArrBoard } from "../context/arrBoard";
 
 
 const StarredData = () => {
-  const {arrStar,setArrStar} = useContext(ArrStar);
+
+  const {arrBoard,setArrBoard}=useContext(ArrBoard);
+  const [obj,setObj]=useState([]);
 
   useEffect(() => {
-    const fetchWorkSpace = async () => {
-      const result = await getStar();
-      setArrStar(result);
-      console.log(result);
+    const fetchBoards = async () => {
+      const result = await getBoards();
+      if(result!=null || undefined){
+        setArrBoard(result);
+      }
     }
   
-    fetchWorkSpace()
+    fetchBoards();
   }, []);
 
-  return arrStar ? (
+  useEffect(() => {
+    Object.values(arrBoard).map((item,index)=>{
+        return (
+          Object.values(item).map((val,valIndex)=>{
+              if(val.starred==="true")
+           obj.push(val);
+          })
+        )
+    })
+  },[])
+  
+  return obj ? (
     <div className="workPopDataContent">
-      {Object.values(arrStar)
-        .map((item, index) => {
+      {obj?.map((item, index) => {
            return (
             <>
               <WorkContent 
@@ -31,5 +44,7 @@ const StarredData = () => {
         })}
     </div>
   ) : null;
+
+  
 };
 export default StarredData;
