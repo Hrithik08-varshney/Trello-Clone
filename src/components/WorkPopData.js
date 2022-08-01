@@ -26,7 +26,11 @@ const WorkPopData=()=>{
                          to={`/${item.title}`}
                         key={index}
                         className="workPopRow">
-                            {item.title}
+                         <div className="workPopRowIcon">{item.title[0]}</div>
+                         <div className="workPopRowTitle">
+                         {item.title}
+                         </div>
+                          
                         </Link>
                     )
                 })

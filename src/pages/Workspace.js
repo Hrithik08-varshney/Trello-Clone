@@ -11,12 +11,14 @@ import { getWorkspace } from "../api/apis";
 import { putWorkspace } from "../api/apis";
 import { getBoards } from "../api/apis";
 import { ArrBoard } from "../context/arrBoard";
+import { WorkspacesTwoTone } from "@mui/icons-material";
 const Workspace = () => {
+
   const { workspace } = useParams();
 
   const { arrWork, setArrWork } = useContext(ArrWorkspace);
   const [work, setWork] = useState(workspace);
-  const [input, setinput] = useState(workspace);
+  const [input, setinput] = useState(work);
   const [desc, setDesc] = useState();
   const [arr, setArr] = useState([]);
   const [click, setClick] = useState(false);
@@ -44,6 +46,10 @@ const Workspace = () => {
     }
   };
 
+  useEffect(()=>{
+    setWork(workspace);
+  },[workspace])
+
   const handleInput = (e) => {
     setinput(e.target.value);
   };
@@ -61,7 +67,6 @@ const Workspace = () => {
     fetchBoard();
   }, []);
 
-
   useEffect(() => {
     console.log(arrWork, "ARRAY")
     Object.values(arrWork)?.map((item, index) => {
@@ -69,7 +74,7 @@ const Workspace = () => {
         setDesc(item.desc);
       }
     });
-  }, [arrWork]);
+  }, [arrWork,workspace]);
 
   //for description
   useEffect(() => {

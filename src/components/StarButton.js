@@ -10,6 +10,7 @@ const StarButton = (props) => {
    const {arrBoard,setArrBoard}=useContext(ArrBoard);
 
   const handleActive=(e,item)=>{
+    console.log(item,"item");
     if (item.starred === "false") {
            item.starred = "true"; 
             e.target.className = "starColor";
@@ -17,7 +18,16 @@ const StarButton = (props) => {
              item.starred = "false";
             e.target.className = "star";
           }
-         
+         for(const key in arrBoard){
+          if(key===item.workspaceName){
+         /*  console.log(key,"key");
+          console.log(arrBoard[key]); */
+          Object.values(arrBoard[key]).map((val)=>{
+              if(val.title===item.title)
+                 val.starred=item.starred;
+          })
+          }
+         }
           console.log(arrBoard);
           putBoard(arrBoard);
   }

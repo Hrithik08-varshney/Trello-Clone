@@ -1,16 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import WorkspaceButton from "./WorkspaceButton";
 import BoardContent from "./BoardsContent";
-import StarContextProvider, { StarProvider } from "../context/start.context";
 import {getBoards} from "../api/apis"
 import { ArrBoard } from "../context/arrBoard";
 
 const BoardRightPanel = () => {
   const {arrBoard,setArrBoard}=useContext(ArrBoard);
   const [objKeys, setObjKeys] = useState([]);
-/*   const {isStarred, setIsStarred} = useContext(StarProvider)
- */
-/*   console.log(isStarred, "ISSTARRED") */
   
   useEffect(() => {
     const fetchBoards = async () => {

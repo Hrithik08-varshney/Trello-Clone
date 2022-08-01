@@ -5,10 +5,26 @@ import RightPanel from "../components/RightPanel";
 import { useContext, useEffect } from "react";
 import { getWorkspace } from "../api/apis";
 import { ArrWorkspace } from "../context/arr.context";
+import { ArrBoard } from "../context/arrBoard";
+import { getBoards } from "../api/apis";
+import  HomeImg from "../assets/HomeImg.png"
 function App() {
   
-  // const [arr, setArr] = useState([]);
-  const { setArrWork} = useContext(ArrWorkspace);
+  const { arrWork,setArrWork} = useContext(ArrWorkspace);
+
+  const {arrBoard,setArrBoard}= useContext(ArrBoard);
+
+
+  useEffect(() => {
+    const fetchBoards = async () => {
+      const result = await getBoards();
+      if(result!=null || undefined){
+        setArrBoard(result);
+      }
+    }
+  
+    fetchBoards();
+  }, []);
 
   useEffect(() => {
     const fetchWorkSpace = async () => {
@@ -16,7 +32,7 @@ function App() {
       setArrWork(result);
     }
   
-    fetchWorkSpace()
+    fetchWorkSpace();
   }, []);
 
   return (
@@ -26,7 +42,10 @@ function App() {
       </div>
       <div className="main">
         <LeftPanel/>
-        <RightPanel />
+       <div className="imgDiv">
+        <img className="homeImgDiv" src={HomeImg} alt="HomeImg" width="400px"/>
+       </div>
+        <RightPanel/>
       </div>
     </div>
   );

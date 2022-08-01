@@ -32,14 +32,15 @@ const StarredData = () => {
     })
   },[])
   
-  return obj ? (
+   return obj ? (
     <div className="workPopDataContent">
       {obj?.map((item, index) => {
            return (
-            <>
+
               <WorkContent 
+              key={index}
                item={item} index={index} />
-            </>
+            
           ); 
         })}
     </div>

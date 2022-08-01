@@ -171,7 +171,7 @@ const ModalComp = (props) => {
                 onClick={postData}
                 exact="true"
                 to={{
-                  pathname: `/create/${urlVal}/${urlTitle}`,
+                  pathname: `/${urlVal}/${urlTitle}`,
                 }}
               >
                 Create

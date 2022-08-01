@@ -6,17 +6,6 @@ import { getStar } from "../api/apis";
 
 const BoardContent=(props)=>{
 
-  const [dataObj, setDataObj] = useState(null);
-
-  useEffect(() => {
-    const fetchWorkSpace = async () => {
-      const result = await getStar();
-      setDataObj(result);
-    }
-  
-    fetchWorkSpace()
-  }, []);
-
     return(
         <div className="yourWorkspaceContent">
         {Object.values(props.item)?.map((val, valIndex) => {
@@ -37,8 +26,6 @@ const BoardContent=(props)=>{
               </Link>
               <StarButton
                 val={val}
-                dataObj={dataObj}
-                setDataObj={setDataObj}
               />
 
             </div>
