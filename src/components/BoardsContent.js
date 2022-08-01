@@ -1,8 +1,5 @@
 import StarButton from "./StarButton";
 import {Link} from "react-router-dom";  
-import {useState,useEffect} from "react";
-import { getStar } from "../api/apis";
-
 
 const BoardContent=(props)=>{
 

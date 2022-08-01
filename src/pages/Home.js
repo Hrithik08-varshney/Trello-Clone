@@ -31,9 +31,9 @@ function App() {
       const result = await getWorkspace();
       setArrWork(result);
     }
-  
-    fetchWorkSpace();
-  }, []);
+    
+    fetchWorkSpace(); 
+  }, [Object.values(arrBoard).length]);
 
   return (
     <div className="App">

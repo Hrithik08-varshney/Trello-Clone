@@ -3,7 +3,7 @@ import { useContext,useEffect } from "react";
 import { getWorkspace } from "../api/apis";
 import { ArrWorkspace } from "../context/arr.context";
 
-const WorkPopData=()=>{
+const WorkPopData=(props)=>{
     const {arrWork, setArrWork} = useContext(ArrWorkspace);
 
   useEffect(() => {
@@ -15,6 +15,7 @@ const WorkPopData=()=>{
   
     fetchWorkSpace()
   }, []);
+
     return (
      <div className="workPopData">
         <p className="title">Your Workspaces</p>
@@ -23,6 +24,9 @@ const WorkPopData=()=>{
                 Object.values(arrWork).map((item,index)=>{
                     return(
                         <Link 
+                        onClick={()=>{
+                          props.setOpen("false");
+                        }}
                          to={`/${item.title}`}
                         key={index}
                         className="workPopRow">

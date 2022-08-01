@@ -376,6 +376,7 @@ font-size: 17px;
   position: absolute;
   top: 10px;
   right: 10px;
+  cursor: pointer;
 }
 .boardsMain{
   display: flex;
@@ -470,6 +471,7 @@ font-size: 17px;
   display: flex;
   padding: 5px;
   border-radius: 5px;
+  color:black
 }
 .contentRow:hover{
   background-color: lightgray;
@@ -484,14 +486,9 @@ font-size: 17px;
   font-size: 15px;
 }
 .contentRowInfoDivParent{
-  width: 220px;
+  width: 180px;
   display: flex;
   justify-content: space-between;
-}
-.starDiv{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
 }
 .contentRowImgDiv img{
   border-radius: 5px;
@@ -632,4 +629,48 @@ font-size: 17px;
 .homeImgDiv{
   border: 0.1px solid rgb(211, 209, 209);
   border-radius: 5px;
+}
+.starButtonDiv{
+  display: flex;
+}
+.deleteWorkspaceDiv{
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.deleteWorkspaceContent{
+  font-family: cursive;
+}
+.deleteWorkBtn{
+background:none;
+border: none;
+border-bottom: 2px solid red;
+color: red;
+font-size: 20px;
+cursor: pointer;
+}
+.deleteWorkspaceContent p{
+color: gray;
+margin: 10px 0px 10px 0px;
+}
+.deleteForm{
+  display: grid;
+}
+.deleteForm input{
+  padding: 5px;
+  margin: 5px;
+  border:none;
+  border-bottom: 1px solid gray;
+  outline: none;
+}
+
+.deleteBtn{
+  padding: 5px;
+  margin: 5px;
+  border: none;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.deleteBtn:hover{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

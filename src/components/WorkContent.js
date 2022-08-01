@@ -1,11 +1,15 @@
 import StarButton from "./StarButton";
+import {Link} from "react-router-dom";
 
 const WorkContent=(props)=>{
 
     return(
+     <div className="starButtonDiv">
+      <Link to={`/${props.item.workspaceName}/${props.item.title}`}>
       <div 
       key={props.index}
       className="contentRow">
+      
         <div className="contentRowImgDiv">
          <img src={props.item.img} alt={props.item.img} width="60px" height="50px"/>
         </div>
@@ -18,13 +22,17 @@ const WorkContent=(props)=>{
          {props.item.workspaceName}
          </p>
         </div>
-        <div className="starDiv">
+        
+        
+        </div>
+        </div>
+      </Link>
+      <div className="starDiv">
         <StarButton
           val={props.item}
         />
         </div>
         </div>
-      </div>
     )
 }
 export default WorkContent;

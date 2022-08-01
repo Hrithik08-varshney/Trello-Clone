@@ -11,17 +11,22 @@ import { getWorkspace } from "../api/apis";
 import { putWorkspace } from "../api/apis";
 import { getBoards } from "../api/apis";
 import { ArrBoard } from "../context/arrBoard";
-import { WorkspacesTwoTone } from "@mui/icons-material";
+import DeleteWorkspaceModal from "../components/DeleteWorkspaceModal";
 const Workspace = () => {
 
   const { workspace } = useParams();
 
   const { arrWork, setArrWork } = useContext(ArrWorkspace);
+  const { arrBoard, setArrBoard } = useContext(ArrBoard);
   const [work, setWork] = useState(workspace);
   const [input, setinput] = useState(work);
   const [desc, setDesc] = useState();
   const [arr, setArr] = useState([]);
   const [click, setClick] = useState(false);
+
+  const [workOpen, setWorkOpen] = useState(false);
+  const handleWorkOpen = () => setWorkOpen(true);
+  const handleWorkClose = () => setWorkOpen(false);
 
   const handleEdit = () => {
     setClick(!click);
@@ -54,10 +59,6 @@ const Workspace = () => {
     setinput(e.target.value);
   };
 
-  //for board data change
-
-  const { arrBoard, setArrBoard } = useContext(ArrBoard);
-
   useEffect(() => {
     const fetchBoard = async () => {
       const res = await getBoards();
@@ -68,7 +69,6 @@ const Workspace = () => {
   }, []);
 
   useEffect(() => {
-    console.log(arrWork, "ARRAY")
     Object.values(arrWork)?.map((item, index) => {
       if (item.title === workspace) {
         setDesc(item.desc);
@@ -81,7 +81,6 @@ const Workspace = () => {
     const fetchWorkSpace = async () => {
       const result = await getWorkspace();
       setArrWork(result);
-      console.log(result, "workspace data");
     };
 
     fetchWorkSpace();
@@ -94,7 +93,6 @@ const Workspace = () => {
     const fetchWorkSpace = async () => {
       const result = await getWorkspaceByName(workspace);
       setArr(result);
-      console.log(result, "board data by name");
     };
 
     fetchWorkSpace();
@@ -146,6 +144,13 @@ const Workspace = () => {
       </div>
       <div className="parentWorkspacePageBoards">
         <WorkspaceBoard arr={arr} />
+      </div>
+      <div className="deleteWorkspaceDiv">
+        <button onClick={handleWorkOpen}
+        className="deleteWorkBtn">
+          Delete this workspace ?
+        </button>
+        <DeleteWorkspaceModal work={work} workOpen={workOpen} handleWorkClose={handleWorkClose} />
       </div>
     </>
   );

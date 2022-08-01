@@ -11,9 +11,6 @@ import CreateButtonData from "./CreateButtonData.js";
 import { Link } from "react-router-dom";
 import WorkPopData from "./WorkPopData.js";
 import StarredData from "./StarredData.js";
-import { useEffect } from "react";
-import { useContext } from "react";
-
 
 const AppBarFunc = () => {
   
@@ -22,7 +19,9 @@ const AppBarFunc = () => {
     {
       name: "Workspace",
       check: "true",
-      popData:<WorkPopData/>
+      popData:<WorkPopData
+          setOpen="setOpen"
+      />
     },
     { name: "Recent", check: "true",
     popData:""
@@ -30,6 +29,7 @@ const AppBarFunc = () => {
   
     { name: "Starred", check: "true",
     popData:<StarredData
+    setOpen="setOpen"
     />
    },
     {
@@ -181,7 +181,7 @@ const AppBarFunc = () => {
                 </div>
                 <div className="notification">
                   <Pop
-                    name={<NotificationsNoneIcon />}
+                    name={<NotificationsNoneIcon/>}
                     styling={notificationStyle}
                     check="false"
                     headingName="Notification"

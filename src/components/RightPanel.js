@@ -2,7 +2,7 @@ import ScheduleIcon from "@mui/icons-material/Schedule";
 import AddIcon from "@mui/icons-material/Add";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import ModalComp from "./Modal";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import "../App.css";
 import { ArrBoard } from "../context/arrBoard";
 import { useContext } from "react";
