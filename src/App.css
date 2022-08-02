@@ -571,7 +571,7 @@ font-size: 17px;
 .createImage {
   width: 100vw;
   height: calc(100vh - 68px);
-  opacity: 0.8;
+  opacity: 0.8; 
 }
 .work{
   display: flex;
@@ -598,7 +598,30 @@ font-size: 17px;
   
 }
 .buttonMenu{
-  position:relative;
+  position:absolute;
+  margin-top: -680px;
+  margin-left: 10px;
+  width: 450px;
+  display: flex;
+  justify-content: space-around;
+  
+}
+.checkInput{
+  font-size: 20px;
+  padding: 5px;
+  width: 150px;
+}
+.buttonMenuBtn{
+  background:transparent;
+  border: 1px solid gray;
+  padding: 5px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.buttonMenuBtn:hover{
+  background-color: rgb(231, 229, 229);
 }
 .workPopRowIcon{
   width: 50px;
@@ -673,4 +696,64 @@ margin: 10px 0px 10px 0px;
 }
 .deleteBtn:hover{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.todoMain{
+  margin-top: -600px;
+  margin-left: 30px;
+  width: 100vw;
+  position: absolute;
+  display: flex;
+  gap: 2%;
+}
+.AddList{
+  background: none;
+  background-color: lightblue;
+  margin:5px;
+  padding: 5px;
+  border: none;
+  font-size: 15px;
+  border-radius: 5px;
+  font-family: cursive;
+  cursor: pointer;
+}
+.AddList:hover{
+  background-color: blue;
+  color: white;
+}
+.titleTodoDiv{
+  background-color: rgb(222, 248, 244);
+  border-radius: 5px;
+  padding: 5px;
+}
+.cross{
+  background: none;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.todoTitleInput{
+  font-size: 17px;
+  padding: 3px;
+  border: 3px solid lightblue;
+  font-family: cursive;
+  border-radius: 5px;
+  outline: none;
+}
+
+.todoDiv{
+  background-color: rgb(222, 248, 244);
+  border-radius: 5px;
+  padding: 5px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.todoHeading{
+  font-family: cursive;
+  font-size: 20px;
+  margin: 5px;
 }

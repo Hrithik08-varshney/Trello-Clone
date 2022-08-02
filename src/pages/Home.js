@@ -10,7 +10,7 @@ import { getBoards } from "../api/apis";
 import  HomeImg from "../assets/HomeImg.png"
 function App() {
   
-  const { arrWork,setArrWork} = useContext(ArrWorkspace);
+  const {arrWork,setArrWork} = useContext(ArrWorkspace);
 
   const {arrBoard,setArrBoard}= useContext(ArrBoard);
 
@@ -33,7 +33,7 @@ function App() {
     }
     
     fetchWorkSpace(); 
-  }, [Object.values(arrBoard).length]);
+  }, []);
 
   return (
     <div className="App">

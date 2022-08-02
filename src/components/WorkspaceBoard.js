@@ -5,6 +5,7 @@ const WorkspaceBoard = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  console.log(props.arr, props, "WorkspaceBoards");
   return props.arr ? (
     <div className="workspacePageBoards">
       {Object.values(props?.arr)?.map((item, index) => {

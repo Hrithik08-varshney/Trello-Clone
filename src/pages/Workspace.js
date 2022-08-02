@@ -1,6 +1,6 @@
 import AppBar from "../components/AppBar";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../App.css";
 import { getWorkspaceByName, putBoard } from "../api/apis";
@@ -13,7 +13,6 @@ import { getBoards } from "../api/apis";
 import { ArrBoard } from "../context/arrBoard";
 import DeleteWorkspaceModal from "../components/DeleteWorkspaceModal";
 const Workspace = () => {
-
   const { workspace } = useParams();
 
   const { arrWork, setArrWork } = useContext(ArrWorkspace);
@@ -27,6 +26,7 @@ const Workspace = () => {
   const [workOpen, setWorkOpen] = useState(false);
   const handleWorkOpen = () => setWorkOpen(true);
   const handleWorkClose = () => setWorkOpen(false);
+  const navigate = useNavigate();
 
   const handleEdit = () => {
     setClick(!click);
@@ -46,14 +46,18 @@ const Workspace = () => {
       if (key === workspace) {
         arrBoard[input] = arrBoard[key];
         delete arrBoard[key];
+        Object.values(arrBoard[input]).map((item) => {
+          item.workspaceName = input;
+        });
       }
       putBoard(arrBoard);
     }
+    navigate(`/${input}`);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setWork(workspace);
-  },[workspace])
+  }, [workspace]);
 
   const handleInput = (e) => {
     setinput(e.target.value);
@@ -69,12 +73,13 @@ const Workspace = () => {
   }, []);
 
   useEffect(() => {
+    console.log("I am here")  
     Object.values(arrWork)?.map((item, index) => {
       if (item.title === workspace) {
         setDesc(item.desc);
       }
     });
-  }, [arrWork,workspace]);
+  }, [arrWork, workspace, navigate]);
 
   //for description
   useEffect(() => {
@@ -84,9 +89,7 @@ const Workspace = () => {
     };
 
     fetchWorkSpace();
-
   }, []);
-
 
   //for workspace data
   useEffect(() => {
@@ -97,6 +100,7 @@ const Workspace = () => {
 
     fetchWorkSpace();
   }, [workspace]);
+
 
   return (
     <>
@@ -146,11 +150,14 @@ const Workspace = () => {
         <WorkspaceBoard arr={arr} />
       </div>
       <div className="deleteWorkspaceDiv">
-        <button onClick={handleWorkOpen}
-        className="deleteWorkBtn">
+        <button onClick={handleWorkOpen} className="deleteWorkBtn">
           Delete this workspace ?
         </button>
-        <DeleteWorkspaceModal work={work} workOpen={workOpen} handleWorkClose={handleWorkClose} />
+        <DeleteWorkspaceModal
+          work={work}
+          workOpen={workOpen}
+          handleWorkClose={handleWorkClose}
+        />
       </div>
     </>
   );
