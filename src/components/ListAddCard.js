@@ -10,13 +10,12 @@ export default function ListAddCard(props) {
         onChange={props.handleChange}
       />
       <div className="titleTodoDivBtns">
-        <button className="AddList" onClick={props.handleAdd}>
-          {" "}
+        <button className="AddList" >
+        
           {props.Add}
         </button>
         <button className="cross" onClick={props.handleTodoTitle}>
-          {" "}
-          X{" "}
+          X
         </button>
       </div>
     </form>

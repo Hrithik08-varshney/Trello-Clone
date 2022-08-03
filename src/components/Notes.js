@@ -7,6 +7,7 @@ import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { useNavigate } from "react-router-dom";
 import TodoList from "./TodoList";
 import ListAddCard from "./ListAddCard";
+import EditIcon from '@mui/icons-material/Edit';
 const Notes = () => {
   const { workspace, title } = useParams();
   const { arrBoard, setArrBoard } = useContext(ArrBoard); //arrBoard data
@@ -17,29 +18,42 @@ const Notes = () => {
 
   const [checkTodoTitle, setTodoTitle] = useState(false); //todo title check pointer
 
+  const [checkList, setCheckList] = useState(false); //check point for list addCard
+
+
   const [todoHead, setTodoHead] = useState(""); //todo list heading
 
-  const [listArr, setListArr] = useState([]); //todo list arr
+  /* const [listArr, setListArr] = useState([]); //todo list arr */
 
-  const [listVal,setListVal]=useState("");  //list value of arr
+  const [listVal, setListVal] = useState(""); //list value of arr
 
   const [todoObj, setTodoObj] = useState([]); //add heading and arrList in an Object
 
-  const [checkList, setCheckList] = useState(false); //check point for list addCard
+  const [checkEdit,setCheckEdit]=useState(false)
 
-  const handlecheckList = () => {
+
+  const handlecheckList = (index) => {
     //setting list check pointer
-    if (checkList === false) setCheckList(true);
-    else setCheckList(false);
-    
+    if (todoObj[index]?.checkList === false) {
+      setCheckList(true);
+      todoObj[index].checkList=true;
+    }
+    else 
+    {
+      setCheckList(false);
+      todoObj[index].checkList=false;
+    }
   };
 
-  const handleAdd = () => {
-    
-    let newObj={
-      todoHead: todoHead, listArr: listArr
-    }
-    setTodoObj([...todoObj,newObj]);
+  const handleTodoForm = (e) => {
+    //todo function
+    e.preventDefault();
+    let newObj = {
+      todoHead: todoHead,
+      listArr: [],
+      checkList:checkList
+    };
+    setTodoObj([...todoObj, newObj]);
     setTodoTitle(false);
   };
 
@@ -54,15 +68,6 @@ const Notes = () => {
     else setTodoTitle(false);
   };
 
-  const handleTodoForm = (e) => {
-    //todo function
-    e.preventDefault();
-    let newObj={
-      todoHead: todoHead, listArr: listArr
-    }
-    setTodoObj([...todoObj,newObj]);
-    setTodoTitle(false);
-  };
 
 
   const navigate = useNavigate();
@@ -117,17 +122,31 @@ const Notes = () => {
     });
   }, [Object.values(arrBoard).length]);
 
-  const handleListForm = (e) => 
-  {
+  const handleListForm = (e,index) => {
     e.preventDefault();
-    setListArr([...listArr,listVal]);
+    todoObj[index]?.listArr.push(listVal);
+    handlecheckList(index);
+
   };
 
   const handleListChange = (e) => {
-    console.log(e.target.value,"eeeeeeeeeeeee");
     setListVal(e.target.value);
   };
-  const handleListAdd = () => {};
+
+  const changeEdit=(e,valIndex,item)=>{
+     e.preventDefault();
+     console.log(valIndex,item,"sdfghjkl");
+     item.listArr[valIndex]=listVal;
+     console.log(todoObj,"todoObj");
+     handleEdit();
+  }
+  const handleEdit=(valIndex)=>{
+      if(checkEdit===false)
+      setCheckEdit(true);
+      else
+      setCheckEdit(false);
+  }
+ 
   return (
     <>
       <div className="notesDiv">
@@ -157,42 +176,73 @@ const Notes = () => {
       </div>
 
       <div className="todoMain">
-        {todoObj && todoObj.length ? (
-
-          todoObj.map((item,index)=>{
-              return(
-                <div 
-                key={index}
-                className="todoDiv">
-            <div className="todoHeading">{item.todoHead}</div>
-            <div className="todoObj">
-              {checkList ? (
-                <ListAddCard
-                key={index}
-                  handleTodoForm={handleListForm}
-                  handleAdd={handleListAdd}
-                  placeholder="Enter a Title For This Card..."
-                  Add="Add Card"
-                  handleTodoTitle={handlecheckList}
-                  handleChange={handleListChange}
-                />
-              ) : (
-                <button className="buttonMenuBtn" onClick={handlecheckList}>
-                  + Add a Card
-                </button>
-              )}
-            </div>
-          </div>
-              )
-          })
-          
-         
-        ) : null}
+        {todoObj && todoObj.length
+          ? todoObj.map((item, index) => {
+              return (
+                <div key={index} className="todoDiv">
+                  <div className="todoHeading">{item.todoHead}</div>
+                  <div className="listCards">
+                    {
+                      todoObj[index].listArr &&
+                      todoObj[index].listArr.map((val,valIndex)=>{
+                        return (
+                            <div 
+                            key={valIndex}
+                            className="listContent">
+                            {
+                              checkEdit ? 
+                              <form onSubmit={(e)=>{
+                                changeEdit(e,valIndex,item);
+                              }}>
+                              <input type="text" defaultValue={todoObj[index].listArr[valIndex]} className="todoTitleInput" onChange={handleListChange}/>
+                              </form>
+                              : ( <><div>
+                            {val}
+                            </div>
+                              <div>
+                                <button className="editList" onClick={()=>{
+                                  handleEdit(valIndex);
+                                }}><EditIcon/></button>
+                              </div></> )
+                            }
+                           </div>
+                        )
+                      })
+                    }
+                  </div>
+                  <div className="todoObj">
+                    { todoObj[index].checkList ? (
+                      <ListAddCard
+                        handleTodoForm={(e)=>{
+                          handleListForm(e,index);
+                        }}
+                     
+                        placeholder="Enter a Title For This Card..."
+                        Add="Add Card"
+                        handleTodoTitle={()=>{
+                          handlecheckList(index);
+                        }}
+                        handleChange={handleListChange}
+                      />
+                    ) : (
+                      <button
+                        className="buttonMenuBtn"
+                        onClick={()=>{
+                          handlecheckList(index);
+                        }}
+                      >
+                        + Add a Card
+                      </button>
+                    )}
+                  </div>  
+                </div>
+              );
+            })
+          : null}
         <div className="todoInputBtn">
           {checkTodoTitle ? (
             <ListAddCard
               handleTodoForm={handleTodoForm}
-              handleAdd={handleAdd}
               placeholder="Enter List title..."
               Add="Add List"
               handleTodoTitle={handleTodoTitle}
@@ -209,5 +259,3 @@ const Notes = () => {
   );
 };
 export default Notes;
-
-

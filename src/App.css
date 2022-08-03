@@ -619,6 +619,7 @@ font-size: 17px;
   letter-spacing: 1px;
   cursor: pointer;
   border-radius: 3px;
+  font-weight: bold;
 }
 .buttonMenuBtn:hover{
   background-color: rgb(231, 229, 229);
@@ -701,7 +702,9 @@ margin: 10px 0px 10px 0px;
 .todoMain{
   margin-top: -600px;
   margin-left: 30px;
-  width: 100vw;
+  width: 1400px;
+  flex-wrap: wrap;
+  height: auto;
   position: absolute;
   display: flex;
   gap: 2%;
@@ -741,15 +744,34 @@ margin: 10px 0px 10px 0px;
   border-radius: 5px;
   outline: none;
 }
+.listCards{
+  display: grid;
+grid-gap: 5px;
+}
 
+.editList{
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+.listContent{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
 .todoDiv{
   background-color: rgb(222, 248, 244);
   border-radius: 5px;
   padding: 5px;
   width: 300px;
-  display: flex;
+  height: fit-content;
+  /* display: flex; */
   flex-direction: column;
   justify-content: space-around;
+  margin: 10px;
 }
 
 .todoHeading{
