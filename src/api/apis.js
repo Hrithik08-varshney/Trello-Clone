@@ -14,6 +14,17 @@ export const putBoard = async(arr)=>{
   axios.put("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/boardData.json",{...arr})
 }
 
+export const putBoardList = async (arr,input)=>{
+  axios.put(`https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/${input}.json`,{...arr})
+}
+
+export const getBoardList = async (input) => {
+
+  const res = await axios.get(`https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/${input}.json`)
+  
+    return res.data;
+  };
+
 export const putWorkspace = async(arrWork)=>{
   axios.put("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/workspace.json",{...arrWork})
 }
