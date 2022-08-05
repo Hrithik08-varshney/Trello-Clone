@@ -21,8 +21,9 @@ export const putBoardList = async (arr,input)=>{
 export const getBoardList = async (input) => {
 
   const res = await axios.get(`https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/${input}.json`)
-  
-    return res.data;
+  // console.log(Object.values(res.data), "I am response");
+  if(res.data)
+    return Object.values(res.data);
   };
 
 export const putWorkspace = async(arrWork)=>{
