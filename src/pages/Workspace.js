@@ -42,8 +42,11 @@ const Workspace = () => {
     });
     putWorkspace(arrWork);
 
+
+    var searchWorkspace;
     for (var key in arrBoard) {
       if (key === workspace) {
+        searchWorkspace=arrBoard[input];
         arrBoard[input] = arrBoard[key];
         delete arrBoard[key];
         Object.values(arrBoard[input]).map((item) => {
@@ -53,6 +56,7 @@ const Workspace = () => {
       putBoard(arrBoard);
     }
     navigate(`/${input}`);
+
   };
 
   useEffect(() => {

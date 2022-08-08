@@ -7,9 +7,20 @@ const res = await axios.get("https://trello-9063b-default-rtdb.asia-southeast1.f
   return res.data;
 };
 
+export const getRecently = async()=>{
+  const res =await axios.get("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/recentlyData.json");
+  if(res.data)
+    return Object.values(res.data);
+}
+
+export const postRecently = async(arr)=>{
+  axios.post("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/recentlyData.json",{...arr})
+}
+
+export const putRecently = async(arr)=>{
+  axios.put("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/recentlyData.json",{...arr})
+}
 export const putBoard = async(arr)=>{
-
-
 
   axios.put("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/boardData.json",{...arr})
 }
@@ -21,7 +32,6 @@ export const putBoardList = async (arr,input)=>{
 export const getBoardList = async (input) => {
 
   const res = await axios.get(`https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/${input}.json`)
-  // console.log(Object.values(res.data), "I am response");
   if(res.data)
     return Object.values(res.data);
   };
@@ -39,4 +49,8 @@ export const getWorkspace=async()=>{
 export const getWorkspaceByName=async(workspace)=>{
 const res=await axios.get( `https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/boardData/${workspace}.json`);
 return (res.data);
+}
+
+export const deleteWorkspace=async(input)=>{
+  await axios.delete(`https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/${input}.json`);
 }
