@@ -24,7 +24,7 @@ export default function Pop(props) {
   return (
     <ClickAwayListener 
     onClickAway={handleClickAway}>
-      <Box sx={{ 
+      <Box sx={{
         position: 'relative' }}>
         <button 
            style={buttonStyle}

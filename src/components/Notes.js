@@ -17,7 +17,6 @@ import ListAddCard from "./ListAddCard";
 import EditIcon from "@mui/icons-material/Edit";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { deleteWorkspace } from "../api/apis";
-import { resolveComponentProps } from "@mui/base";
 
 const Notes = () => {
   const { workspace, title } = useParams();
@@ -39,8 +38,6 @@ const Notes = () => {
   const [todoObj, setTodoObj] = useState([]); //add heading and arrList in an Object
 
   const [checkEdit, setCheckEdit] = useState(false); //checking edit list content toggle input
-
-  const [recentArr, setRecently] = useState([]);
 
   const postData = (newObj) => {
     console.log(newObj);
@@ -139,16 +136,38 @@ const Notes = () => {
     setTitleInput(e.target.value);
   };
 
+  // const [flag,setFlag]=useState(false);
+  
+  const recently = (result,val) => {
+    var flag=false;
+    console.log(result,val,"result,vakl");
+    result.map((item,index)=>{
+      if(item?.img===val?.img && item?.starred===val?.starred && item?.title===val?.title && item?.workspaceName===val?.workspaceName){
+        flag=true;
+      }
+    })
+        if(flag===false){
+          console.log(flag,"flag");
+      if ( result===undefined || result?.length <= 3) {
+        console.log(result, "recent-Array-length");
+        postRecently({ ...val });
+      } else {
+        result?.shift();
+        console.log(result, "result after shift");
+        result?.push({ ...val });
+        putRecently(result);
+      }
+    } 
+  };
+
   useEffect(() => {
     const fetchRecently = async () => {
-      const result = await getRecently();
-      if (result !== null || result !== undefined) {
-        setRecently(result);
-     }
+      const result = await getRecently(); 
+        recently(result,obj);
     };
 
     fetchRecently();
-  }, []);
+  }, [obj]); 
 
   useEffect(() => {
     //  setting boards data
@@ -161,28 +180,12 @@ const Notes = () => {
     fetchBoards();
   }, []);
 
-  const recently = async(val) => {
-    console.log(recentArr,"recentArr");
-    if (!recentArr?.includes(val)) {
-      if (recentArr && recentArr?.length <= 4) {
-        console.log(recentArr, "recent-Array-length");
-        postRecently({ ...val });
-      } else {
-        recentArr?.shift();
-        console.log(recentArr, "recentArr after shift");
-        recentArr?.push({ ...val });
-        putRecently(recentArr);
-      }
-    }
-  };
-
   useEffect(() => {
     ///filtering arrBoard data according to needed obj
     Object.values(arrBoard).map((item, index) => {
       return Object.values(item).map((val, valIndex) => {
         if (val.title === title) {
           setObj({ ...val });
-          if (recentArr !== null || recentArr !== undefined) recently(val);
         }
       });
     });

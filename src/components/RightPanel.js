@@ -8,6 +8,8 @@ import { ArrBoard } from "../context/arrBoard";
 import { useContext } from "react";
 import WorkContent from "./WorkContent";
 import { useEffect } from "react";
+import RecentlyData from "./RecentlyData";
+
 
 const RightPanel = () => {
   const { arrBoard } = useContext(ArrBoard);
@@ -54,7 +56,10 @@ const RightPanel = () => {
         </div>
         <div className="recentlyTitle">Recently Viewed</div>
       </div>
-      <div className="recentlyPara"></div>
+      <div className="recentlyPara">
+        <RecentlyData
+        />
+      </div>
       <div
         onClick={() => {
           handleOpen();

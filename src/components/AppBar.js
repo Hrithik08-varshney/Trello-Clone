@@ -11,9 +11,11 @@ import CreateButtonData from "./CreateButtonData.js";
 import { Link } from "react-router-dom";
 import WorkPopData from "./WorkPopData.js";
 import StarredData from "./StarredData.js";
+import RecentlyData from "./RecentlyData.js";
+import SearchData from "./SearchData";
+import { useState } from "react";
 
 const AppBarFunc = () => {
-  
 
   const data = [
     {
@@ -24,7 +26,7 @@ const AppBarFunc = () => {
       />
     },
     { name: "Recent", check: "true",
-    popData:""
+    popData:<RecentlyData/>
    },
   
     { name: "Starred", check: "true",
@@ -57,8 +59,7 @@ const AppBarFunc = () => {
     position: "absolute",
     color: "black",
     top: 40,
-    right: 0,
-    left: 0,
+    left: -55,
     zIndex: 1,
     border: "1px solid",
     p: 1,
@@ -104,6 +105,11 @@ const AppBarFunc = () => {
     bgcolor: "background.paper",
     cursor: "pointer",
   };
+
+  const [searchValue,setSearchValue]=useState("");
+
+  const handleSearchValue=(e)=>setSearchValue(e.target.value);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -159,17 +165,16 @@ const AppBarFunc = () => {
                       }}
                     />
                   </div>
-
-                  <form>
                     <Pop
                       name={
-                        <input className="searchInput" placeholder="Search" />
+                        <input className="searchInput" placeholder="Search" onChange={handleSearchValue}/>
                       }
                       check="false"
                       styling={searchStyle}
                       headingName="Search"
-                    ></Pop>
-                  </form>
+                    ><SearchData
+                    searchValue={searchValue}
+                    /></Pop>
                 </div>
                 <div className="info">
                   <Pop

@@ -399,6 +399,7 @@ font-size: 17px;
 .yourWorkspaceContent{
   width: 1000px;
   display: flex;
+  flex-wrap: wrap;
 }
 .yourWorkspaceHeading{
   margin: 10px 0px 10px 0px;
@@ -471,16 +472,23 @@ font-size: 17px;
   display: flex;
   padding: 5px;
   border-radius: 5px;
-  color:black
+  
+}
+.contentRowBtn{
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 .contentRow:hover{
   background-color: lightgray;
 }
 .contentRowInfoDiv{
   margin-left: 5px;
+
 }
 .contentRowInfoDivHead{
   font-weight: bold;
+  text-align: left;
 }
 .contentRowInfoDivSpaceName{
   font-size: 15px;
@@ -656,6 +664,7 @@ font-size: 17px;
 }
 .starButtonDiv{
   display: flex;
+
 }
 .deleteWorkspaceDiv{
   height: 100px;

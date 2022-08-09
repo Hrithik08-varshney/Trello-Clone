@@ -7,7 +7,7 @@ import { getWorkspace } from "../api/apis";
 import { ArrWorkspace } from "../context/arr.context";
 import { ArrBoard } from "../context/arrBoard";
 import { getBoards } from "../api/apis";
-import  HomeImg from "../assets/HomeImg.png"
+import  HomeImg from "../assets/insertImages/HomeImg.png"
 function App() {
   
   const {arrWork,setArrWork} = useContext(ArrWorkspace);
