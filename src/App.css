@@ -788,3 +788,6 @@ grid-gap: 5px;
   font-size: 20px;
   margin: 5px;
 }
+.taskValueDiv{
+  width: 250px;
+}

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { getBoards } from "../api/apis";
 import { useState } from "react";
 import notfound from "../assets/insertImages/notfound.jpeg";
-import { faCommentsDollar } from "@fortawesome/free-solid-svg-icons";
 
 const ImageComponent = () => {
   return <img src={notfound} alt="Not found" width="280px" height="200px" />;
@@ -29,28 +28,23 @@ export default function SearchData(props) {
     };
     fetchBoards();
   }, []);
-
   //   console.log(arrSearch, "ARRAY");
 
   const filterData = (items) => {
-    // console.log(items, "itemsss");
-    if (props.searchValue === "") {
-      setIsBoolean(true);
-      return;
-    }
-
-    items.filter((item) => {
-      console.log(item?.title, "TITLE");
-      if (props.searchValue === item.title) {
-          setIsBoolean(false);
-        setFilteredArray([...filteredArray, item]);
-      }
-
-      if (props.searchValue !== item.title) {
-        setIsBoolean(true);
+    items.map((item) => {
+      if (props.searchValue.toLowerCase() === item.title.toLowerCase() ) {
+        console.log(props.searchValue);
+        console.log(props.searchValue.toLowerCase() === item.title.toLowerCase(), item,"sjdshiushiuh");
+        setFilteredArray([item]);
+        setIsBoolean(false);
       }
     });
+    if (isBoolean ===  false) {
+      setIsBoolean(true);
+    }
+
   };
+
 
   useEffect(() => {
     console.log(filteredArray, "FILTERED_ARRAY_IFFF");
@@ -60,7 +54,8 @@ export default function SearchData(props) {
 
   useEffect(() => {
     filterData(arrSearch);
-  }, [props.searchValue, arrSearch]);
+    // setIsBoolean(true);
+  }, [props.searchValue]);
 
   return (
     <div>
@@ -70,9 +65,6 @@ export default function SearchData(props) {
         filteredArray &&
         filteredArray.length &&
         filteredArray?.map((val, index) => {
-          {
-            /* console.log(val, "vaaaallllll"); */
-          }
           return (
             <div key={index} className="starButtonDiv">
               <div className="contentRowBtn">
@@ -102,9 +94,3 @@ export default function SearchData(props) {
     </div>
   );
 }
-
-/* check ? (
-    <div className="notFoundDiv">
-      <img src={notfound} alt="Not found" width="280px" height="200px" />
-    </div>
-  ) :  */

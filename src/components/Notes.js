@@ -17,6 +17,7 @@ import ListAddCard from "./ListAddCard";
 import EditIcon from "@mui/icons-material/Edit";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { deleteWorkspace } from "../api/apis";
+import { TaskModal } from "./TaskModal";
 
 const Notes = () => {
   const { workspace, title } = useParams();
@@ -38,6 +39,11 @@ const Notes = () => {
   const [todoObj, setTodoObj] = useState([]); //add heading and arrList in an Object
 
   const [checkEdit, setCheckEdit] = useState(false); //checking edit list content toggle input
+
+  const [taskModalOpen, setTaskModalOpen] = useState(false);
+
+  const handleTaskOpen = () => setTaskModalOpen(true);
+  const handleTaskClose = () => setTaskModalOpen(false);
 
   const postData = (newObj) => {
     console.log(newObj);
@@ -140,20 +146,16 @@ const Notes = () => {
   
   const recently = (result,val) => {
     var flag=false;
-    console.log(result,val,"result,vakl");
     result.map((item,index)=>{
       if(item?.img===val?.img && item?.starred===val?.starred && item?.title===val?.title && item?.workspaceName===val?.workspaceName){
         flag=true;
       }
     })
         if(flag===false){
-          console.log(flag,"flag");
       if ( result===undefined || result?.length <= 3) {
-        console.log(result, "recent-Array-length");
         postRecently({ ...val });
       } else {
         result?.shift();
-        console.log(result, "result after shift");
         result?.push({ ...val });
         putRecently(result);
       }
@@ -347,7 +349,12 @@ const Notes = () => {
                                         </form>
                                       ) : (
                                         <>
-                                          <div>{val.list}</div>
+                                          <div className="taskValueDiv" onDoubleClick={()=>handleTaskOpen()}>{val.list}</div>
+                                          <TaskModal 
+                                          val={val}
+                                          item={item}
+                                          valIndex={valIndex}
+                                          taskModalOpen={taskModalOpen} handleTaskClose={handleTaskClose}/>
                                           <div>
                                             <button
                                               className="editList"
