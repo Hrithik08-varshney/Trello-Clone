@@ -791,3 +791,51 @@ grid-gap: 5px;
 .taskValueDiv{
   width: 250px;
 }
+.listHeading{
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(105, 105, 186);
+  font-weight: bold;
+
+}
+.listHeadingIcon{
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.listDescriptionInput textarea{
+  padding: 10px;
+  margin: 10px 0px 10px 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.rightBtns{
+  margin-top: 10px;
+  width: 150px;
+  display: grid;
+}
+.rightBtns h4{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(105, 105, 186);
+  font-weight: bold;
+}
+.boxContent{
+  display: flex;
+  justify-content: space-between;
+}
+.rightDivBtn{
+  font-size: 20px;
+  display: flex;
+  padding: 5px;
+  background-color: rgb(172, 232, 252);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.rightDivBtn:hover{
+   background-color: lightblue;
+}
+.rightDivBtnTitle{
+  margin-left: 5px;
+}

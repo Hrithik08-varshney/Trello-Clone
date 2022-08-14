@@ -18,10 +18,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { deleteWorkspace } from "../api/apis";
 import { TaskModal } from "./TaskModal";
+import { ListName } from "../context/listName";
 
 const Notes = () => {
   const { workspace, title } = useParams();
   const { arrBoard, setArrBoard } = useContext(ArrBoard); //arrBoard data
+
+  const { setListName } = useContext(ListName); //listName for modal
+
   // const {depArr,setDepArr}=useState();
   const [obj, setObj] = useState({}); //filtered object according to workspace,title
 
@@ -42,7 +46,10 @@ const Notes = () => {
 
   const [taskModalOpen, setTaskModalOpen] = useState(false);
 
-  const handleTaskOpen = () => setTaskModalOpen(true);
+  const handleTaskOpen = (val) => {
+    setListName(val);
+    setTaskModalOpen(true);
+  } 
   const handleTaskClose = () => setTaskModalOpen(false);
 
   const postData = (newObj) => {
@@ -349,10 +356,9 @@ const Notes = () => {
                                         </form>
                                       ) : (
                                         <>
-                                          <div className="taskValueDiv" onDoubleClick={()=>handleTaskOpen()}>{val.list}</div>
+                                          <div className="taskValueDiv" onDoubleClick={()=>handleTaskOpen(val)}>{val.list}</div>
                                           <TaskModal 
                                           val={val}
-                                          item={item}
                                           valIndex={valIndex}
                                           taskModalOpen={taskModalOpen} handleTaskClose={handleTaskClose}/>
                                           <div>
