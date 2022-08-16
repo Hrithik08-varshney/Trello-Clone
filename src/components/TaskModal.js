@@ -10,6 +10,8 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AttachmentIcon from '@mui/icons-material/Attachment';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ListBtnPopper from "./ListBtnPopper";
+import LabelsData from "./LabelsData";
 const style = {
   position: "absolute",
   top: "50%",
@@ -29,7 +31,8 @@ export const TaskModal = (props) => {
   const btnData=[
     {
      icon:<BookmarkBorderIcon/>,
-     title:"Labels"
+     title:"Labels",
+     innerData:<LabelsData/>
     },
     {
       icon:<CheckBoxIcon/>,
@@ -88,10 +91,13 @@ export const TaskModal = (props) => {
             {
               btnData.map((item,index)=>{
                  return (
-                  <div key={index} className="rightDivBtn">
-                  <div className="rightDivBtnIcon">{item.icon}</div>
-                  <div className="rightDivBtnTitle">{item.title}</div>
-                  </div>
+                  <ListBtnPopper
+                  index={index}
+                    itemIcon={item.icon}
+                    itemTitle={item.title}
+                  >
+                    {item.innerData}
+                  </ListBtnPopper>
                  )
               })
             }
@@ -107,3 +113,13 @@ export const TaskModal = (props) => {
     </div>
   );
 };
+
+
+/* btnData.map((item,index)=>{
+                 return (
+                  <div key={index} className="rightDivBtn">
+                  <div className="rightDivBtnIcon">{item.icon}</div>
+                  <div className="rightDivBtnTitle">{item.title}</div>
+                  </div>
+                 )
+              }) */

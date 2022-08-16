@@ -628,6 +628,7 @@ font-size: 17px;
   cursor: pointer;
   border-radius: 3px;
   font-weight: bold;
+  margin: 5px;
 }
 .buttonMenuBtn:hover{
   background-color: rgb(231, 229, 229);
@@ -838,4 +839,51 @@ grid-gap: 5px;
 }
 .rightDivBtnTitle{
   margin-left: 5px;
+}
+.listBtnPopper{
+  width: 320px;
+}
+.colors{
+  width: 300px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+.createInput{
+  margin: 10px;
+}
+.createInput input{
+  width: 280px;
+  padding: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 5px;
+}
+.selectColor h4{
+  margin-left: 10px;
+}
+.labelRow{
+  width: 280px;
+   display: flex;
+   justify-content: space-between;
+   margin: 10px;
+   font-size: 20px;
+}
+.labelBtn{
+  display:flex;
+}
+.labelEdit{
+  cursor: pointer;
+  border-radius: 5px;
+}
+.labelEdit:hover{
+  background-color: green;
+}
+.labelDelete{
+  cursor: pointer;
+  border-radius: 5px;
+}
+.labelDelete:hover{
+  background-color: red;
 }

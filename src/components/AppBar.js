@@ -135,7 +135,7 @@ const AppBarFunc = () => {
 
                 <div className="menu-list">
                   {data.map((item) => (
-                    <Pop
+                   <Pop
                       key={item.name}
                       name={item.name}
                       check={item.check}
