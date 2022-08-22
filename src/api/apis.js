@@ -17,6 +17,10 @@ export const postRecently = async(arr)=>{
   axios.post("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/recentlyData.json",{...arr})
 }
 
+export const postListModalData= async(listName,obj)=>{
+  axios.put(`https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/${listName}.json`,{obj})
+}
+
 export const putRecently = async(arr)=>{
   axios.put("https://trello-9063b-default-rtdb.asia-southeast1.firebasedatabase.app/recentlyData.json",{...arr})
 }

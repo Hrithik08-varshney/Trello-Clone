@@ -1,7 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect,useContext } from "react";
+import { postListModalData } from "../api/apis";
+import { ListName } from "../context/listName";
+
 
 export default function LabelsData() {
+
   let styles = [
     {
       backgroundColor: "Tomato",
@@ -10,14 +14,16 @@ export default function LabelsData() {
       display: "flex",
       justifyContent: "space-around",
       alignItems: "center",
+      tick:false,
       color:"black"
-    },
+    },  
     {
       backgroundColor: "Orange",
       width: "80px",
       height: "50px",
       display: "flex",
       justifyContent: "space-around",
+      tick:false,
       alignItems: "center",
     },
     {
@@ -26,6 +32,7 @@ export default function LabelsData() {
       height: "50px",
       display: "flex",
       justifyContent: "space-around",
+      tick:false,
       alignItems: "center",
     },
     {
@@ -34,6 +41,7 @@ export default function LabelsData() {
       height: "50px",
       display: "flex",
       justifyContent: "space-around",
+      tick:false,
       alignItems: "center",
     },
     {
@@ -42,6 +50,7 @@ export default function LabelsData() {
       height: "50px",
       display: "flex",
       justifyContent: "space-around",
+      tick:false,
       alignItems: "center",
     },
     {
@@ -50,6 +59,7 @@ export default function LabelsData() {
       height: "50px",
       display: "flex",
       justifyContent: "space-around",
+      tick:false,
       alignItems: "center",
     },
     {
@@ -58,6 +68,7 @@ export default function LabelsData() {
       height: "50px",
       display: "flex",
       justifyContent: "space-around",
+      tick:false,
       alignItems: "center",
     },
     {
@@ -66,6 +77,7 @@ export default function LabelsData() {
       height: "50px",
       display: "flex",
       justifyContent: "space-around",
+      tick:false,
       alignItems: "center",
     },
     {
@@ -74,12 +86,19 @@ export default function LabelsData() {
       height: "50px",
       display: "flex",
       justifyContent: "space-around",
+      tick:false,
       alignItems: "center",
     },
   ];
 
+  const { listName } = useContext(ListName); //listName for modal
+
+
   const [labelArr,setLabelArr]=useState([]);
   const [checkLabel, setCheckLabel] = useState(true);
+
+  const [labelArrIndx,setLabelArrIndx]=useState();
+  const [styleIndx,setStyleIndx]=useState();
 
 const [prevItem,setPrevItem]=useState({});
 
@@ -89,25 +108,53 @@ const handleLabelInput=(e)=>{
     setLabelInput(e.target.value);
 }
 const handleEdit=(item,index)=>{
-    console.log(item);
+  handleCheck();
+  setLabelInput(item.name);
+  labelArr.splice(index,1);
 }
 const handleDelete=(index)=>{
     const newArr = labelArr.filter((arrElem, e) => e !== index);
     setLabelArr(newArr);
 }
+
+const handleCancel=()=>{
+  handleCheck();
+  setLabelInput("");
+}
+
+const handleAddTick=(item,index)=>{
+  item.tick=true;
+  setLabelArrIndx(index);
+  let obj={
+    labelArr,
+     dueDate:"",
+     description:"",
+     checkList:[]
+  }
+  console.log(obj,"objectsssss");
+  // postListModalData(listName,obj);
+}
+
+useEffect(() => {
+}, [labelArr[labelArrIndx]])
+
 const handleCreate=()=>{
     let pushObj={
         color:prevItem?.item?.backgroundColor,
         name:labelInput,
         id:labelInput+prevItem?.index,
-        tick:true,
-        show:false
+        tick:false
     }
     setLabelArr([...labelArr,pushObj]);
+    let obj={
+      labelArr,
+       dueDate:"",
+       description:"",
+       checkList:[]
+    }
+    setLabelInput("");
     handleCheck();
 }
-
-console.log(labelArr,"labelArr");
 
   const handleCheck = () => {
     setCheckLabel(!checkLabel);
@@ -117,10 +164,14 @@ console.log(labelArr,"labelArr");
     styles[index]={
         ...item
     }
+    setStyleIndx(index);
     setPrevItem({
        index,item
     });
   };
+  useEffect(() => {
+  }, [styles[styleIndx]])
+  
   return (
     <div className="labelInnerDiv">
       {checkLabel ? (
@@ -136,9 +187,23 @@ console.log(labelArr,"labelArr");
                     width:"220px",
                     borderRadius:"5px",
                     fontWeight:"bold",
-                    padding:"5px"
+                    padding:"5px",
+                    display:"flex",
+                    justifyContent:"space-between"
                  }}>
+                 <div style={{
+                    cursor:"pointer"
+                   }}onClick={()=>{
+                     return handleAddTick(item,index);
+                   }}>
                    {item.name}
+                   </div>
+                   <div >
+                   {
+                    item.tick ? <p>✔</p> : null
+                   }
+                   </div>
+                   
                  </div>
                  <div className="labelBtn">
                  <div className="labelEdit" onClick={()=>{
@@ -165,7 +230,7 @@ console.log(labelArr,"labelArr");
         <div className="createLabelData">
           <div className="createInput">
             <h4>Name</h4>
-            <input type="text" onChange={handleLabelInput}/>
+            <input type="text" onChange={handleLabelInput} value={labelInput}/>
           </div>
           <div className="selectColor">
             <h4>Select a Color</h4>
@@ -180,7 +245,7 @@ console.log(labelArr,"labelArr");
                     }}
                   >
                     {
-                        item.tick ? <h1>✔</h1> :<h1></h1>
+                        item.tick ? <h4>✔</h4> :<h4> </h4>
                     }
                   </div>
                 );
@@ -189,7 +254,7 @@ console.log(labelArr,"labelArr");
           </div>
           <div className="createCancel">
             <button className="buttonMenuBtn" onClick={handleCreate}>Create</button>
-            <button className="buttonMenuBtn">Cancel</button>
+            <button className="buttonMenuBtn" onClick={handleCancel}>Cancel</button>
           </div>
         </div>
       )}

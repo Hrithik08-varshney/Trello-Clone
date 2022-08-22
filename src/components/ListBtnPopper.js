@@ -22,6 +22,7 @@ export default function BasicPopover(props) {
                   <div className="rightDivBtnTitle">{props.itemTitle}</div>
                   </div>    
       <Popover
+      key={props.key}
         id={id}
         open={open}
         anchorEl={anchorEl}

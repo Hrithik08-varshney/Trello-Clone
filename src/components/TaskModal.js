@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import { useContext } from "react";
+import { useContext,useState,useEffect } from "react";
 import { ListName } from "../context/listName";
 import DescriptionIcon from "@mui/icons-material/Description";
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -52,7 +52,20 @@ export const TaskModal = (props) => {
      }
 
   ]
+
+  const [listDataObj,setListDataObj]=useState({
+    labels:[],
+     dueDate:"",
+     description:"",
+     checkList:[]
+  })
   const { listName } = useContext(ListName); //listName for modal
+  const [desc,setDesc]=useState("");
+
+  const handleDesc=(e)=>{
+      setDesc(e.target.value);
+      listDataObj.description=desc;
+  }
 
   return (
     <div>
@@ -81,7 +94,7 @@ export const TaskModal = (props) => {
                 <div className="listHeadingTitle">Description</div>
               </div>
               <div className="listDescriptionInput">
-              <textarea cols="65" rows="5" placeholder="Add a more detailed description.."></textarea>
+              <textarea cols="65" rows="5" onChange={handleDesc} placeholder="Add a more detailed description.."></textarea>
               </div>
             </div>
           </div>
@@ -92,6 +105,7 @@ export const TaskModal = (props) => {
               btnData.map((item,index)=>{
                  return (
                   <ListBtnPopper
+                  key={index}
                   index={index}
                     itemIcon={item.icon}
                     itemTitle={item.title}
