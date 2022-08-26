@@ -93,7 +93,12 @@ export default function LabelsData() {
 
   const { listName } = useContext(ListName); //listName for modal
 
-
+  const [obj,setObj]=useState({
+    labelArrObj:[],
+    dueDate:"",
+    description:"",
+    checkList:[]
+  })
   const [labelArr,setLabelArr]=useState([]);
   const [checkLabel, setCheckLabel] = useState(true);
 
@@ -123,20 +128,19 @@ const handleCancel=()=>{
 }
 
 const handleAddTick=(item,index)=>{
+  if(item.tick===true)
+  item.tick=false;
+  else
   item.tick=true;
   setLabelArrIndx(index);
-  let obj={
-    labelArr,
-     dueDate:"",
-     description:"",
-     checkList:[]
-  }
-  console.log(obj,"objectsssss");
-  // postListModalData(listName,obj);
+  setObj({...obj,labelArrObj:labelArr});
 }
 
 useEffect(() => {
-}, [labelArr[labelArrIndx]])
+  console.log(labelArr,"here is my label array");
+  setObj({...obj,labelArrObj:labelArr});
+  postListModalData(listName.list,obj);
+}, [labelArr,labelArr[labelArrIndx]])
 
 const handleCreate=()=>{
     let pushObj={
@@ -146,15 +150,15 @@ const handleCreate=()=>{
         tick:false
     }
     setLabelArr([...labelArr,pushObj]);
-    let obj={
-      labelArr,
-       dueDate:"",
-       description:"",
-       checkList:[]
-    }
     setLabelInput("");
     handleCheck();
 }
+
+useEffect(()=>{
+  postListModalData(listName.list,obj);
+  console.log(obj,"objectsssss");
+
+},[obj.labelArrObj])
 
   const handleCheck = () => {
     setCheckLabel(!checkLabel);
@@ -198,6 +202,7 @@ const handleCreate=()=>{
                    }}>
                    {item.name}
                    </div>
+                   {console.log(item.tick,"tickkkkkkkkkk")}
                    <div >
                    {
                     item.tick ? <p>✔</p> : null
